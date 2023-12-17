@@ -1,7 +1,7 @@
 const generateForm = document.querySelector(".generate-form");
 const imageGallery = document.querySelector(".image-gallery");
 
-const OPENAI_API_KEY = "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";
+const OPENAI_API_KEY = "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";
 let isImageGenerating = false;
 
 
@@ -10,7 +10,7 @@ const updateImageCard = (imgDataArray) => {
     imgDataArray.forEach((imgObject, index) => {
         const imgCard = imageGallery.querySelectorAll(".img-card")[index];
         const imgElement = imgCard.querySelector("img");
-        const downloadBtn = imgCard.querySelector("download-btn")
+        const downloadBtn = imgCard.querySelector(".download-btn")
         
         const aiGeneratedImg = `data:image/jpeg;base64,${imgObject.b64_json}`;
         imgElement.src = aiGeneratedImg;
@@ -21,7 +21,7 @@ const updateImageCard = (imgDataArray) => {
             downloadBtn.setAttribute("download", `${new Date().getTime()}.jpg`);
         }
     });
-    }
+}
 
 const generateAIImages = async (userPrompt, userImgQuantity) => {
     try {
@@ -34,7 +34,7 @@ const generateAIImages = async (userPrompt, userImgQuantity) => {
             },
             body: JSON.stringify({
                 prompt: userPrompt,
-                n: userImgQuantity,
+                n: parseInt(userImgQuantity),
                 size: "512x512",
                 response_format: "b64_json"
             })
